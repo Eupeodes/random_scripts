@@ -1,8 +1,10 @@
 set-option -g default-shell /bin/bash
 set -g default-terminal "screen-256color"
 
+#enable mouse mode (for selecting panes etc)
 set -g mouse on
 
+#colors/styling
 set -g status-bg colour019
 set -g status-fg white
 set -g message-bg colour017
@@ -10,10 +12,10 @@ set -g message-fg white
 
 set-option -gw window-status-format '#[bg=colour017] #I #W #[default]'
 set-option -gw window-status-current-format '#[bg=black] #I #W #[default]'
-#set-option -gw window-status-alert-format '#[bg=colour021]#[fg=black] #I #W #[default]'
 set-option -gw window-status-bell-bg colour012
 set-option -gw window-status-bell-bg black
 
+# status bar
 set -g status-left ' '
 set -g status-right '#(cut -d " " -f 1-3 /proc/loadavg) | %a %d %b %H:%M'
 set -g status-interval 1
@@ -24,14 +26,19 @@ bind r \
         source-file ~/.tmux.conf \;\
         display "Config reloaded"
 
+#disable layout switching
 unbind Space
 
+#Change split keys to \ (side by side) and - (top bottom)
+unbind "
 unbind %
 bind \ split-window -h
 bind - split-window -v
 
+#Keybinding for toggle visibility of status bar
 bind b set-window-option status
 
+#Change keybinding for switch client from L to l
 unbind L
 unbind l
 bind l switch-client -l
